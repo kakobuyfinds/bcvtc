@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index,follow">
+  <meta name="description" content="Browse the OrientDig spreadsheet guide, filter HipoBuyFind listings by category, and check sizing, QC photos and shipping costs before ordering.">
+  <meta name="theme-color" content="#123b30">
+  <title>OrientDig spreadsheet | Product Catalog, Sizing &amp; QC Guide</title>
+  <!-- Save as index.html. Once the public URL is available, request indexing in Google Search Console and Bing Webmaster Tools. Submission is pending. -->
+  <!-- Search results reviewed: orientdigi.com, orientdigs.com, orientdig-spreadsheet.com, spreadsheetorientdig.com and JadeShip's OrientDig search. Results emphasize catalog size, QC photos and category browsing. This page adds a searchable source catalog with item IDs, CNY prices and a checklist tied to the exact variant and total cost. Exact Google positions were not verified. -->
+  <style>
+    :root{color-scheme:light;--ink:#133529;--muted:#496157;--green:#145540;--line:#cdded4;--paper:#f3f7f3;--white:#fff}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.6 system-ui,sans-serif}
+    .wrap{width:min(100% - 2rem,68rem);margin-inline:auto}
+    header{background:#123b30;color:#fff;padding:clamp(3rem,8vw,6rem) 0;text-align:center}
+    h1,h2,h3,p{margin:0}
+    h1{font-size:clamp(2.5rem,7vw,5rem);line-height:1.06;letter-spacing:-.055em}
+    h2{font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.15;letter-spacing:-.035em}
+    header p{max-width:48ch;margin:1rem auto 1.6rem;color:#d9ece2}
+    a{color:var(--green)}
+    .button{display:inline-block;border-radius:.65rem;padding:.65rem 1rem;background:var(--green);color:#fff;text-decoration:none;font-weight:700}
+    header .button{background:#cff3dc;color:#123b30}
+    a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #a35119;outline-offset:4px}
+    main{padding-block:2.5rem 3rem}
+    section+section{margin-top:2.75rem}
+    .intro{text-align:center;max-width:68ch;margin:0 auto}
+    .intro p,.catalog-note{margin-top:.7rem;color:var(--muted)}
+    .filters{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.25rem}
+    .filters[hidden],tr[hidden]{display:none}
+    label{display:grid;gap:.25rem;flex:1 1 14rem;font-weight:650}
+    input,select{width:100%;min-height:2.75rem;border:1px solid #829e90;border-radius:.5rem;padding:.45rem .65rem;background:#fff;color:var(--ink);font:inherit}
+    #results{margin:.65rem 0;color:var(--muted)}
+    .panel{overflow-x:auto;border:1px solid var(--line);border-radius:.85rem;background:#fff}
+    table{width:100%;border-collapse:collapse;text-align:left}
+    th,td{padding:.65rem clamp(.35rem,2vw,1rem);border-bottom:1px solid var(--line);vertical-align:top}
+    thead{background:#e4efe8}
+    tbody tr:last-child td{border:0}
+    td:nth-child(3),td:last-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+    .buy{text-align:center;margin-top:1.1rem}
+    .guide{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:1rem;margin-top:1rem}
+    article,details{background:#fff;border:1px solid var(--line);border-radius:.85rem;padding:1rem}
+    article p,details p{margin-top:.4rem;color:var(--muted)}
+    details{margin-top:.75rem}
+    summary{cursor:pointer;font-weight:700}
+    footer{border-top:1px solid var(--line);padding:1.25rem 0;text-align:center;color:var(--muted)}
+  </style>
+<link rel="canonical" href="https://kakobuyfinds.github.io/bcvtc/">
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>OrientDig spreadsheet</h1>
+      <p>Find shoes, hoodies, T-shirts and jackets from HipoBuyFind, then check the exact listing before you order.</p>
+      <a class="button" href="https://hipobuyfind.com">OrientDig spreadsheet</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro" aria-labelledby="overview-heading">
+      <h2 id="overview-heading">From spreadsheet to shortlist</h2>
+      <p>An OrientDig spreadsheet organizes product listings for shoppers using a buying agent. Use the catalog below to compare item prices, then use the item ID to locate the listing on HipoBuyFind and retrieve the original seller link.</p>
+    </section>
+
+    <section aria-labelledby="catalog-heading">
+      <h2 id="catalog-heading">HipoBuyFind product catalog</h2>
+      <p class="catalog-note">Selected listings from HipoBuyFind. Prices are snapshots in Chinese yuan (CNY). Confirm the current price and stock at the source.</p>
+      <div class="filters" id="filters" hidden>
+        <label for="query">Search by product name or item ID
+          <input type="search" id="query" placeholder="Try fleece or 154917">
+        </label>
+        <label for="category">Category
+          <select id="category">
+            <option value="">All categories</option>
+            <option>Shoes</option>
+            <option>Hoodies &amp; sweaters</option>
+            <option>T-shirts</option>
+            <option>Jackets</option>
+          </select>
+        </label>
+      </div>
+      <p id="results" role="status"></p>
+      <div class="panel">
+        <table aria-labelledby="catalog-heading">
+          <thead>
+            <tr><th scope="col">Product</th><th scope="col">Category</th><th scope="col">CNY</th><th scope="col">Item ID</th></tr>
+          </thead>
+          <tbody id="products">
+            <tr><td>Black and red basketball sneakers</td><td>Shoes</td><td>¥145.00</td><td>149969</td></tr>
+            <tr><td>Cream chunky sneakers with wide laces</td><td>Shoes</td><td>¥350.00</td><td>148191</td></tr>
+            <tr><td>Black canvas low-top sneakers with gum soles</td><td>Shoes</td><td>¥450.00</td><td>148188</td></tr>
+            <tr><td>Gray hoodie</td><td>Hoodies &amp; sweaters</td><td>¥300.00</td><td>154936</td></tr>
+            <tr><td>Fleece-lined hoodie</td><td>Hoodies &amp; sweaters</td><td>¥170.00</td><td>154917</td></tr>
+            <tr><td>Crewneck sweatshirt</td><td>Hoodies &amp; sweaters</td><td>¥150.00</td><td>154916</td></tr>
+            <tr><td>Graphic short-sleeve T-shirt</td><td>T-shirts</td><td>¥105.00</td><td>154920</td></tr>
+            <tr><td>Short-sleeve T-shirt</td><td>T-shirts</td><td>¥105.00</td><td>154919</td></tr>
+            <tr><td>Hooded quick-dry jacket</td><td>Jackets</td><td>¥157.14</td><td>154851</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="buy"><a class="button" href="https://hipobuyfind.com">Buy it now</a></div>
+    </section>
+
+    <section aria-labelledby="check-heading">
+      <h2 id="check-heading">What to check before ordering</h2>
+      <div class="guide">
+        <article>
+          <h3>Match the size and color</h3>
+          <p>Open the seller listing and confirm the selected variant. For clothing, compare the seller’s measurements with a garment you already own. For shoes, check how the seller measures foot or insole length.</p>
+        </article>
+        <article>
+          <h3>Review QC photos</h3>
+          <p>If warehouse photos are available, compare the size label, color and visible stitching with the listing. Ask for close-ups if a measurement or detail is missing, and check the return window before approving shipment.</p>
+        </article>
+        <article>
+          <h3>Estimate the total cost</h3>
+          <p>Add the item price, seller-to-warehouse shipping, any agent fees and the international shipping quote. Check whether the carrier charges by actual or volumetric weight and whether taxes are due at delivery.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="faq-heading">
+      <h2 id="faq-heading">OrientDig spreadsheet FAQ</h2>
+      <details>
+        <summary>How do I find an item from the table?</summary>
+        <p>Search HipoBuyFind by product name and match the item ID in the result. Use the original seller URL from the product page to check whether OrientDig accepts the listing.</p>
+      </details>
+      <details>
+        <summary>Why did the price change after I selected a size or color?</summary>
+        <p>A seller can set different prices for different variants. Use the amount shown for your selected variant when estimating the order total.</p>
+      </details>
+      <details>
+        <summary>Can I use a QC photo from another listing?</summary>
+        <p>Use it as a visual reference. To evaluate your own order, check photos of the exact item received at the warehouse, if available.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Independent shopping guide · Catalog source: HipoBuyFind</div>
+  </footer>
+
+  <script>
+    const filters = document.getElementById('filters');
+    const query = document.getElementById('query');
+    const category = document.getElementById('category');
+    const results = document.getElementById('results');
+    const rows = Array.from(document.querySelectorAll('#products tr'));
+
+    function filterCatalog() {
+      const terms = query.value.trim().toLowerCase().split(/\s+/);
+      let visibleCount = 0;
+
+      for (const row of rows) {
+        const matchesCategory = !category.value || row.cells[1].textContent === category.value;
+        const searchableText = `${row.cells[0].textContent} ${row.cells[3].textContent}`.toLowerCase();
+        row.hidden = !(matchesCategory && terms.every(term => searchableText.includes(term)));
+        if (!row.hidden) visibleCount++;
+      }
+
+      results.textContent = visibleCount
+        ? `Showing ${visibleCount} of ${rows.length} listings`
+        : 'No matching listings. Try a different name, item ID, or category.';
+    }
+
+    query.addEventListener('input', filterCatalog);
+    category.addEventListener('change', filterCatalog);
+    filterCatalog();
+    filters.hidden = false;
+  </script>
+</body>
+</html>
